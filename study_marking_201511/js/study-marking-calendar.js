@@ -85,9 +85,9 @@ $(document).ready(function(){
 			// 日付押下時イベント
 			dayClick: function(date, jsEvent, view) {
 				var thisMonth = (view.title).replace('年', '/').replace('月', '/01');
-				thisMonth = new Date(thisMonth);
-				var momentMonth = new Date(moment(date));
-				if(thisMonth.getMonth() == momentMonth.getMonth()) {
+				thisMonth = new Date(thisMonth).getMonth() + 1;
+				var momentMonth = moment(date).format("M");
+				if(thisMonth == momentMonth) {
 					alert(moment(date).format('YYYY/MM/DD[(]ddd[)]') + ' がクリックされました。');
 				}
 			},
@@ -106,17 +106,17 @@ $(document).ready(function(){
 
 	// datepickerの変更イベントを拾ってカレンダー変更
 	$('#cal').on('change', gotoDate);
-	
+
 	// 月遷移（前月）
 	function prev() {
 		$("#calendar").fullCalendar('prev');
 	}
-	
+
 	// 月遷移（翌月）
 	function next() {
 		$("#calendar").fullCalendar('next');
 	}
-	
+
 	// 月変更
 	function gotoDate() {
 		if(new Date($('#cal').val() + "/01") > new Date('2100/12/31') || new Date($('#cal').val() + "/01") < new Date('1900/01/01')) {
@@ -126,7 +126,7 @@ $(document).ready(function(){
 			$("#calendar").fullCalendar('gotoDate', $('#cal').val() + "/01");
 		}
 	}
-	
+
 	// 土日の文字色を変更
 	$('.fc-sat').css('color', 'blue');
 	$('.fc-sun').css('color', 'red');
