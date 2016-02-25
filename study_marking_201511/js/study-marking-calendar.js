@@ -82,17 +82,6 @@ $(document).ready(function(){
 				day: '日'
 			},
 
-			// 当月以外の日付をグレーアウト
-			dayRender: function(date, cell)
-			{
-				var selDate = moment(date).format("YYYYMM");
-				var nowMonth = moment($("#calendar").fullCalendar('getDate')).format("YYYYMM");
-				if(selDate != nowMonth)
-				{
-					cell.css("background-color", "#D3D3D3");
-				}
-			},
-
 			// 日付押下時イベント
 			dayClick: function(date, jsEvent, view) {
 				var thisMonth = (view.title).replace('年', '/').replace('月', '/01');
