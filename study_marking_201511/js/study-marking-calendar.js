@@ -69,8 +69,7 @@ $(document).ready(function(){
 			// 曜日名称
 			dayNames: ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'],
 			dayNamesShort: ['日','月','火','水','木','金','土'],
-
-			// 週モード
+			
 			weekMode: 'liquid',
 
 			// ボタン文字列
@@ -109,21 +108,21 @@ $(document).ready(function(){
 
 	// datepickerの変更イベントを拾ってカレンダー変更
 	$('#cal').on('change', gotoDate);
-
+	
 	// 月遷移（前月）
 	function mprev() {
 		$("#calendar").fullCalendar('prev');
 	}
-
+	
 	// 月遷移（翌月）
 	function mnext() {
 		$("#calendar").fullCalendar('next');
 	}
-
+	
 	// 月変更
 	function gotoDate() {
 		if($('#cal').val() == "") return;
-
+	
 		if(new Date($('#cal').val() + "/01") > new Date('2100/12/31') || new Date($('#cal').val() + "/01") < new Date('1900/01/01')) {
 			alert('選択日付が出力可能範囲外です。');
 		}
