@@ -46,7 +46,7 @@ $(document).ready(function(){
 			header: {
 				left: 'prev,next',
 				center: 'title',
-				right: 'month,basicWeek,basicDay'
+				right: ''
 			},
 
 			// タイトル部定義
