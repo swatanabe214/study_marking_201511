@@ -126,8 +126,4 @@ $(document).ready(function(){
 			$("#calendar").fullCalendar('gotoDate', $('#cal').val() + "/01");
 		}
 	}
-
-	// 土日の文字色を変更
-	$('.fc-sat').css('color', 'blue');
-	$('.fc-sun').css('color', 'red');
 });
