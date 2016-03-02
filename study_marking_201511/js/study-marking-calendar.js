@@ -44,7 +44,7 @@ $(document).ready(function(){
 
 			// ヘッダーのタイトルとボタン
 			header: {
-				left: 'prev,next',
+				left: '',
 				center: 'title',
 				right: ''
 			},
