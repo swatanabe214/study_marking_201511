@@ -88,9 +88,9 @@ $(document).ready(function(){
 			// 日付押下時イベント
 			dayClick: function(date, jsEvent, view) {
 				var thisMonth = (view.title).replace('年', '/').replace('月', '/01');
-				thisMonth = new Date(thisMonth);
-				var momentMonth = new Date(moment(date));
-				if(thisMonth.getMonth() == momentMonth.getMonth()) {
+				thisMonth = new Date(thisMonth).getMonth() + 1;
+				var momentMonth = moment(date).format("M");
+				if(thisMonth == momentMonth) {
 					alert(moment(date).format('YYYY/MM/DD[(]ddd[)]') + ' がクリックされました。');
 				}
 			},
