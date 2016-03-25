@@ -3,6 +3,20 @@ $(document).ready(function(){
 
 	var jsonData = [];
 
+	// カレンダー用のオブジェクト用意
+	var cal = '<div class="form-inline"><div class="form-group col-md-4">表示月を選択してください。<input type="text" id="cal" class="form-control" ></div></div>';
+	$("#calendar").before(cal);
+
+	// momentの書式設定
+	moment.locale('ja');
+
+	// 用意したカレンダーにdatepickerをセット
+	$('#cal').datepicker({
+		format: 'yyyy/mm',
+		language: 'ja',
+		autoclose : true,
+		minViewMode: 'months'
+	});
 	// JSONデータ作成
 	$.get('schedule.json', function(data) {
 		try {
@@ -22,23 +36,9 @@ $(document).ready(function(){
 	})
 	.fail(function(jqxhr, status, error) {
 		alert('スケジュールファイルが読み込めません。');
-	});
-
-	// カレンダー用のオブジェクト用意
-	var cal = '<input type="text" id="cal" readonly="readonly">';
-	$("#calendar").before(cal);
-
-	// 用意したカレンダーにdatepickerをセット
-	$('#cal').datepicker({
-		format: 'yyyy/mm',
-		language: 'ja',
-		autoclose : true,
-		minViewMode: 'months'
-	});
-
-	// $.eachの呼ばれるタイミングが遅いため、カレンダー作成を遅延実行する
-	setTimeout(function(){
-
+	}).always(function()
+	{
+		// JSON読み込み完了後に実行する。
 		// FullCalendar作成
 		$("#calendar").fullCalendar({
 
@@ -70,6 +70,8 @@ $(document).ready(function(){
 			dayNames: ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'],
 			dayNamesShort: ['日','月','火','水','木','金','土'],
 
+			weekMode: 'liquid',
+
 			// 週の表示段数（可変）
 			weekMode: 'liquid',
 
@@ -99,33 +101,37 @@ $(document).ready(function(){
 			events: jsonData
 
 		});
-	}, 500);
+	});
 
 	// 月遷移（前月）イベント
-	$('#textLeft').on('click', prev);
+	$('#textLeft').on('click', mprev);
 
 	// 月遷移（翌月）イベント
-	$('#textRight').on('click', next);
+	$('#textRight').on('click', mnext);
 
 	// datepickerの変更イベントを拾ってカレンダー変更
 	$('#cal').on('change', gotoDate);
 
 	// 月遷移（前月）
-	function prev() {
+	function mprev() {
 		$("#calendar").fullCalendar('prev');
 	}
 
 	// 月遷移（翌月）
-	function next() {
+	function mnext() {
 		$("#calendar").fullCalendar('next');
 	}
 
 	// 月変更
 	function gotoDate() {
+		if($('#cal').val() == "") return;
+
 		if(new Date($('#cal').val() + "/01") > new Date('2100/12/31') || new Date($('#cal').val() + "/01") < new Date('1900/01/01')) {
 			alert('選択日付が出力可能範囲外です。');
 		}
 		else {
-			$("#calendar").fullCalendar('gotoDate', $('#cal').val() + "/01");
+			var goDate = new Date("" + $('#cal').val() + "/01");
+			$("#calendar").fullCalendar('gotoDate', moment(goDate));
 		}
+	}
 });

@@ -8,11 +8,37 @@
     color: red;
     background-color: #fff0f0;
 }
-.fc-time
+
+#textLeft:hover
 {
-	display: none;
+	background-color: #eee;
+	cursor: pointer;
+}
+#textRight:hover
+{
+	background-color: #eee;
+	cursor: pointer;
 }
 .fc-other-month
 {
 	visibility: hidden;
+}
+.fc-time
+{
+	display: none;
+}
+
+.datepicker table tr td span:hover
+{
+	background : #cceeff;
+}
+
+.fc-day:hover
+{
+	cursor: pointer;
+}
+
+.fc-other-month:hover
+{
+	cursor: default;
 }
