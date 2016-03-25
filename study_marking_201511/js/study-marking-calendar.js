@@ -128,5 +128,4 @@ $(document).ready(function(){
 		else {
 			$("#calendar").fullCalendar('gotoDate', $('#cal').val() + "/01");
 		}
-	}
 });
